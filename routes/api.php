@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
+use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('register',[AuthenticationController::class,'register']);
+
+Route::post('create',[CounselorsController::class,'createCounselors']);
+Route::post('update',[CounselorsController::class,'updateCounselors']);
+Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+
+
 
