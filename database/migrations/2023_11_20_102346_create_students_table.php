@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('student_id')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('father_occupation');
-            $table->string('Height');
-            $table->string('weight');
+            $table->float('Height');
+            $table->float('weight');
             $table->enum('gender',['male','female'])->default('male');
             $table->string('marital_status');
             $table->string('age');
@@ -39,6 +40,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('is_active',['yes','no'])->default('yes');
             $table->enum('is_deleted',['yes','no'])->default('no');
+            $table->foreign('user_id')->references('id')->on('users');
+           
              $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
