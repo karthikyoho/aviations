@@ -5,7 +5,10 @@ namespace App\Repositories\Student;
 use App\Models\User;
 use App\Repositories\BaseRepositoryInterface;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticationRepository implements BaseRepositoryInterface
 {
@@ -40,5 +43,38 @@ class AuthenticationRepository implements BaseRepositoryInterface
 
             return response()->json(['message' => $e->getMessage()], 401);
         }
+    }
+
+
+
+
+
+    public function login($credentials){
+        try {
+            if(Auth::attempt($credentials)){
+                $user = Auth::user();
+                Log::warning($user);                           
+        
+                $token = auth()->user()->createToken('AuthToken')->accessToken;
+                $response = [
+                    "user_id"=>$user->id,
+                    "name"=>$user->name,
+                    "email"=>$user->email,
+                    "phone"=>$user->phone,
+                    "token"=>$token
+                ];
+                return ["status"=>true,"message"=>"Login successfull","data"=>$response];                
+               
+            }
+            else {
+                throw ValidationException::withMessages([
+                    'email' => ['The provided credentials are incorrect.'],
+                ]);
+            }
+        } catch (Exception $e) {
+            Log::warning($e->getMessage());
+            return ["status"=>false,"message"=>$e->getMessage()];
+        }
+
     }
 }
