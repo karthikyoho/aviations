@@ -34,15 +34,7 @@ class AuthenticationController extends Controller
 
             $validator->validate();
 
-            // $imagePath = [];
-            // $imageDirectory = "assets/student/images"; // image storing folder
-            // if ($request->hasFile('files')) {
-            //     $productFiles = $request->file('files');
-            //     foreach ($productFiles as $key => $value) {
-            //         $imagePath[] = $this->img->uploadImage($value, $imageDirectory);
-            //     }
-            // }
-
+           
             return $this->repo->createUser($request->all());
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -51,5 +43,27 @@ class AuthenticationController extends Controller
         }
     }
 
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            $credentials = [];
+            $credentials['email'] = $request->input('username');
+            $credentials['password'] = $request->input('password');
+            return $this->repo->login($credentials);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
     
 }

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\StudentController;
+use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
+use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +28,22 @@ Route::post('register',[AuthenticationController::class,'register']);
 
 
 Route::post('create',[StudentController::class,'createUser']);
+Route::post('login',[AuthenticationController::class,'login']);
+
+
+Route::post('create',[CounselorsController::class,'createCounselors']);
+Route::post('update',[CounselorsController::class,'updateCounselors']);
+Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+
+
+
+Route::prefix('college')->group(function (){
+
+    Route::post('create',[CollegeController::class,'create']);
+    Route::post('update',[CollegeController::class,'update']);
+    Route::post('delete',[CollegeController::class,'delete']);
+
+
+
+});
+
