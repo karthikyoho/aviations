@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('course_id')->unique();
             $table->string('name')->unique();
             $table->string('description');
-            $table->string('course_duraton');
+            $table->string('course_duration');
             $table->string('image');
             $table->enum('is_deleted', ['yes', 'no'])->default('no');
             $table->enum('is_active', ['yes', 'no'])->default('no');
