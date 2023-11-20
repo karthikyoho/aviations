@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('counselors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('staff_id');
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('office_location')->nullable();
+            $table->foreign('staff_id')->references('staff_id')->on('staff');
+         
             $table->timestamps();
         });
     }
