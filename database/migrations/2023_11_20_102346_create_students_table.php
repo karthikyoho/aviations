@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('father_occupation');
-            $table->string('Height');
-            $table->string('weight');
+            $table->float('Height');
+            $table->float('weight');
             $table->enum('gender',['male','female'])->default('male');
             $table->string('marital_status');
             $table->string('age');
