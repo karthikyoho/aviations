@@ -16,14 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('counselor_id');
             $table->string('student_id');
             $table->string('course_id');
-            $table->dateTime('appointment_date');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->text('notes')->nullable();
-
-            $table->dateTime('appointment_time');
+            $table->dateTime('councelling_date');
             $table->foreign('course_id')->references('course_id')->on('courses');
             $table->foreign('counselor_id')->references('id')->on('counselors');
             $table->foreign('student_id')->references('student_id')->on('students');
-         });
+        });
     }
 
     /**

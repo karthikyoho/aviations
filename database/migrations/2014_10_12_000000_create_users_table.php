@@ -28,9 +28,7 @@ return new class extends Migration
             $table->string('otp',6)->nullable();
             $table->enum('is_admin',['yes','no'])->default('no');
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('is_active',['yes','no'])->default('yes');
-            $table->enum('is_deleted',['yes','no'])->default('no');
-            $table->rememberToken();
+              $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
