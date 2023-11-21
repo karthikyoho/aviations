@@ -54,7 +54,7 @@ Route::get('showall',[CounselorsController::class,'showallCounselors']);
 Route::post('listbyid',[CounselorsController::class,'listbyid']);
 
 
-Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
+// Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 
