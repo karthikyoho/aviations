@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::prefix('student')->group(function (){
+Route::prefix('users')->group(function (){
 
 Route::post('register',[AuthenticationController::class,'register']);
 Route::post('create',[StudentController::class,'createUser']);
@@ -38,7 +38,11 @@ Route::post('login',[AuthenticationController::class,'login']);
 
 });
 
+Route::prefix('student')->group(function (){
+  Route::post('create',[StudentController::class,'createUser']);
+  Route::post('update',[StudentController::class,'updateStudent']);
 
+});
 
 
 Route::post('create',[CounselorsController::class,'createCounselors']);
