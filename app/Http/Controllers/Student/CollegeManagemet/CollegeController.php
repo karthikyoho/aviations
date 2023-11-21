@@ -63,36 +63,43 @@ class CollegeController extends Controller
     }
 
        //update College By Id
-    public function update(Request $req) {
+       public function update(Request $req) {
         Log::warning($req);
         try {
             $validator = Validator::make($req->all(), [
-
-                // 'institute_id' => 'required',
                 'id' => 'required|string',
-                'college_name'=>'nullable',
-                'description' =>'nullable',
-                'address_line_1'=>'nullable' ,
-                'city'=>'nullable',
-                'state'=>'nullable',
-                'pincode'=>'nullable',
-                'alternate_number'=>'nullable',
-                'official_website' =>'nullable',
-                'facebook'=>'nullable',
-                'linkedin'=>'nullable' ,
-                'instagram'=>'nullable',
-                'twitter'=>'nullable',
-                'phone'=> 'nullable',
-
+                'college_name' => 'nullable',
+                'description' => 'nullable',
+                'address_line_1' => 'nullable',
+                'city' => 'nullable',
+                'state' => 'nullable',
+                'pincode' => 'nullable',
+                'alternate_number' => 'nullable',
+                'official_website' => 'nullable',
+                'facebook' => 'nullable',
+                'linkedin' => 'nullable',
+                'instagram' => 'nullable',
+                'twitter' => 'nullable',
+                'phone' => 'nullable',
             ]);
-         
-
+    
+            // Validate file inputs
+            if ($req->hasFile('logo')) {
+                $validator->addRules(['logo' => 'image|mimes:jpeg,png,jpg,gif']);
+            }
+    
+            if ($req->hasFile('gallery')) {
+                $validator->addRules(['gallery.*' => 'image|mimes:jpeg,png,jpg,gif']);
+            }
+    
+            $validator->validate();
+    
             $CollegeImgPath = "assets/college_management/college/image";
             $filePath = "";
             if ($req->hasFile('logo')) {
                 $filePath = $this->img->uploadImage($req->file('logo'), $CollegeImgPath);
             }
-
+    
             $CollegeGalleryPath = "assets/college_management/college/gallery";
             $gallery = [];
             if ($req->hasFile('gallery')) {
@@ -101,19 +108,15 @@ class CollegeController extends Controller
                     $gallery[] = $this->img->uploadImage($galleryFile, $CollegeGalleryPath);
                 }
             }
-            $validator->validate();
-
-
-            $result = $this->repo->update($request->all(), $filePath, $gallery);
-
+    
+            $result = $this->repo->update($req->all(), $filePath, $gallery);
+    
             return response()->json($result);
-
+    
         } catch (\Exception $e) {
             return response()->json(["status" => false, 'message' => $e->getMessage()], 500);
         }
-    
     }
-  
         //delete College By id
     public function delete(Request $req){
         Log::warning($req);
