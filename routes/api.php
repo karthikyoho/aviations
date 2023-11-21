@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
-use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+// use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
 use App\Http\Controllers\Student\CouncellingManagement\CouncellingAppointmentsController;
+use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+use App\Http\Controllers\Student\CouncellingManagement\CourseController;
 use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::prefix('student')->group(function (){
+Route::prefix('users')->group(function (){
 
 Route::post('register',[AuthenticationController::class,'register']);
 Route::post('create',[StudentController::class,'createUser']);
@@ -36,14 +39,22 @@ Route::post('login',[AuthenticationController::class,'login']);
 
 });
 
+Route::prefix('student')->group(function (){
+  Route::post('create',[StudentController::class,'createUser']);
+  Route::post('update',[StudentController::class,'updateStudent']);
+  Route::post('show',[StudentController::class,'studentShowData']);
 
+});
 
 
 Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
 Route::post('delete',[CounselorsController::class,'deleteCounselors']);
 Route::get('showall',[CounselorsController::class,'showallCounselors']);
-Route::post('l',[CounselorsController::class,'listbyid']);
+Route::post('listbyid',[CounselorsController::class,'listbyid']);
+
+
+Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 
@@ -75,7 +86,7 @@ Route::prefix('departments')->group(function(){
 Route::prefix('courses')->group(function(){
     Route::post('create',[CourseController::class,'create']);
     Route::post('update',[CourseController::class,'update']);
-    Route::delete('destroy',[CourseController::class,'delete']);
+    Route::post('destroy',[CourseController::class,'delete']);
     Route::get('show',[CourseController::class,'show']);
     Route::post('status',[CourseController::class,'status']);
     Route::get('getCourseById',[CourseController::class,'getCourseById']);

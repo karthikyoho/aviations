@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\CounselingAppointmentsRepository;
+// use App\Repositories\CounselingAppointmentsRepository;
+use App\Repositories\Student\CounselingAppointmentsRepository ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;

@@ -21,8 +21,73 @@ class StudentController extends Controller
         $this->img = $img;
     }
 
-    public function createUser(Request $request)
+    public function createStudent(Request $request)
     {
-       
-}
+        try {
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required|string',
+                'user_id'=>'required',
+                'last_name' => 'required|string|unique:users,email',
+                
+            ]);
+
+            $imagePath = [];
+            $imageDirectory = "assets/college_management/students/files";
+            if($request->hasFile('files')){
+                $productFiles = $request->file('files');
+                foreach($productFiles as $key => $value){
+                    $imagePath[] = $this->img->uploadImage($value,$imageDirectory);
+                }
+            }
+
+            $validator->validate();
+
+            return $this->repo->createStudent($request->all(),$imagePath);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 422);
+        }
+    }
+
+
+   public function updateStudent(Request $req){
+    Log::warning($req);
+    try{
+    $validator = Validator::make($req->all(), [
+        'student_id' => 'required',        
+    ]);
+    $imagePath = [];
+    $imageDirectory = "assets/college_management/students/files";
+    if($req->hasFile('files')){
+        $productFiles = $req->file('files');
+        foreach($productFiles as $key => $value){
+            $imagePath[] = $this->img->uploadImage($value,$imageDirectory);
+        }
+    }
+    $validator->validate();
+
+    return $this->repo->updateStudent($req->all(),$imagePath);
+    }catch (ValidationException $e) {
+        return response()->json(['errors' => $e->errors()], 422);
+    }
+
+
+   }
+
+   public function studentShowData(Request $req){
+    {
+        $search = $req->input('search', '');
+        return $this->repo->studentShowData($search);
+    }
+
+   }
+
+
+
+
+
+
+
+
 }

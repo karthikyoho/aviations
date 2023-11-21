@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Student;
 
 use App\Models\CouncellingAppointment;
 use Illuminate\Support\Facades\DB;
