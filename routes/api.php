@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
 use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
@@ -22,9 +23,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
+Route::prefix('student')->group(function (){
+
 Route::post('register',[AuthenticationController::class,'register']);
 
 Route::post('login',[AuthenticationController::class,'login']);
+
+});
+
 
 
 Route::post('create',[CounselorsController::class,'createCounselors']);
@@ -39,7 +47,6 @@ Route::prefix('college')->group(function (){
     Route::post('update',[CollegeController::class,'update']);
     Route::post('delete',[CollegeController::class,'delete']);
 
-
-
 });
 
+Route::post('staff-create',[StaffController::class,'staffCreate']);

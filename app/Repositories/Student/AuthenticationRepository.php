@@ -21,7 +21,7 @@ class AuthenticationRepository implements BaseRepositoryInterface
         try {
             $user = User::create([
                 'name' => $request['name'],
-                'DOB' => $request['DOB'],
+                // 'DOB' => $request['DOB'],
                 'phone' => $request['phone'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
