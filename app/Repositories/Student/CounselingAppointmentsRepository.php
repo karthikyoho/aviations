@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Student;
 
 use Illuminate\Support\Facades\DB;
 use Exception;

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
 use App\Repositories\ImageRepository;
 use App\Repositories\Student\CourseRepository;
 use Illuminate\Http\Request;
@@ -80,5 +79,3 @@ class CourseController extends Controller
             }
          
 }
-
-

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CounselingAppointmentsRepository;
+use App\Repositories\Student\CounselingAppointmentsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
