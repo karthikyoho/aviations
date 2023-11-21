@@ -94,6 +94,9 @@ Route::prefix('courses')->group(function(){
    
 });
 
+
+Route::prefix('Staff-Management')->group(function(){
+
 Route::post('staff-create',[StaffController::class,'staffCreate']);
 
 Route::post('staff-update',[StaffController::class,'updateStaff']);
@@ -107,6 +110,7 @@ Route::post('status',[StaffController::class,'status']);
 Route::get('get-staff-by-id',[StaffController::class,'getStaffById']);
 
 
+});
 
 
 
