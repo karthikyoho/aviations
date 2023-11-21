@@ -13,23 +13,23 @@ class College extends Model
     protected $guarded=[];
 
     
-    public static function boot()
-    {
-        parent::boot();
+    // public static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($college) {
-            if (!$college->college_id) {
-                $college->college_id = self::generateUniqueCollegeId(strtoupper($college->college_name));
-            }
-        });
-    }
+    //     static::creating(function ($college) {
+    //         if (!$college->college_id) {
+    //             $college->college_id = self::generateUniqueCollegeId(strtoupper($college->college_name));
+    //         }
+    //     });
+    // }
 
-    // Generate a unique 'college_id'
-    public static function generateUniqueCollegeId($name)
-    {
-        $collegePrefix = Str::slug($name) . "CLGID01";
-        $collegePrefix = strtoupper($collegePrefix);
-        return $collegePrefix;
-    }
+    // // Generate a unique 'college_id'
+    // public static function generateUniqueCollegeId($name)
+    // {
+    //     $collegePrefix = Str::slug($name) . "CLGID01";
+    //     $collegePrefix = strtoupper($collegePrefix);
+    //     return $collegePrefix;
+    // }
 
 }

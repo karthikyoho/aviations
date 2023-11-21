@@ -42,6 +42,12 @@ Route::prefix('college')->group(function (){
     Route::post('create',[CollegeController::class,'create']);
     Route::post('update',[CollegeController::class,'update']);
     Route::post('delete',[CollegeController::class,'delete']);
+    Route::get('show',[CollegeController::class,'show']);
+    Route::post('status',[CollegeController::class,'status']);
+    Route::get('get-college-by-id',[CollegeController::class,'getCollegeById']);
+
+
+
 
 
 

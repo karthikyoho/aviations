@@ -19,10 +19,11 @@ class CounselorsController extends Controller
     public function createCounselors(Request $req){
         Log::warning($req);
         $name=$req->input('name');
+        $staff_id=$req->input('staff_id');
         $email=$req->input('email');
         $phone=$req->input('phone');
         $office_location=$req->input('office_location');
-        return $this->repo->createCounselors($name,$email,$phone,$office_location);
+        return $this->repo->createCounselors($name,$staff_id,$email,$phone,$office_location);
 
     }
 
