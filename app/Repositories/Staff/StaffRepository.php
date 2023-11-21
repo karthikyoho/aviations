@@ -39,7 +39,7 @@ class StaffRepository implements BaseRepositoryInterface
             $upper = mb_strtoupper($select_name);
 
             $academicPrefix =  $upper . "STAFFID";
-            $newId = self::generateUniqueAcademicId($academicPrefix,$college_id);
+            $newId = self::generateUniqueAcademicId($academicPrefix);
 
             $staff = Staff::create([
                 'college_id' => $college_id,
