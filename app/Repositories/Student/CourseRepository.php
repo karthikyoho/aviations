@@ -144,7 +144,8 @@ class CourseRepository implements BaseRepositoryInterface
                             return ["status" => false, "message" => $e->getMessage()];
                         }
                     }
-
+                   
+                    //delete Course Data by id
                     public function delete($id)
                     {
                         DB::beginTransaction();
