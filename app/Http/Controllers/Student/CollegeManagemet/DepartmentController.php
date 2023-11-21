@@ -8,5 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class DepartmentController extends Controller
 {
-    
+
 }
+
+

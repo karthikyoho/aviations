@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\StudentController;
 use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
@@ -24,17 +25,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
+Route::prefix('student')->group(function (){
+
 Route::post('register',[AuthenticationController::class,'register']);
-
-
-
 Route::post('create',[StudentController::class,'createUser']);
 Route::post('login',[AuthenticationController::class,'login']);
+
+});
+
+
 
 
 Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
 Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+Route::get('showall',[CounselorsController::class,'showallCounselors']);
+Route::post('l',[CounselorsController::class,'listbyid']);
+
+
 
 
 
@@ -47,15 +57,9 @@ Route::prefix('college')->group(function (){
     Route::post('status',[CollegeController::class,'status']);
     Route::get('get-college-by-id',[CollegeController::class,'getCollegeById']);
 
-});
 
-Route::prefix('course')->group(function (){
 
-    Route::post('create',[CourseController::class,'create']);
-    Route::post('update',[CourseController::class,'update']);
-    Route::post('delete',[CourseController::class,'delete']);
-    Route::get('show',[CourseController::class,'show']);
-    Route::post('status',[CourseController::class,'status']);
-    Route::get('get-course-by-id',[CourseController::class,'getCourseById']);
 
 });
+
+Route::post('staff-create',[StaffController::class,'staffCreate']);

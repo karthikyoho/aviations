@@ -138,4 +138,48 @@ class CounselorsRepository implements BaseRepositoryInterface
             return ["status" => false, "message" => $th->getMessage()];
         }
     }
+
+    public function showAllcounselors(){
+        DB::beginTransaction();
+        try {
+            
+            $Counselors = Counselors::paginate(60);
+            DB::commit();
+            return ["status" => true, "data" => $Counselors, "message" => " Counselors data list  successfully"];
+        } catch (Exception $e) {
+            Log::warning($e);
+            DB::rollBack();
+            return ["status" => false, "message" => $e->getMessage()];
+        }
+    }
+ 
+    public function listbyId($id)
+    {
+        DB::beginTransaction();
+        try {
+            
+            if (!$id) {
+                DB::rollBack();
+                return ["status" => false, "message" => "ID is mandatory"];
+            }
+
+        
+            $Counselors = DB::table('counselors')
+                ->where('id', $id)
+                ->first();
+
+            
+            if (!$Counselors) {
+                DB::rollBack();
+                return ["status" => false, "message" => "Id is invalid"];
+            }
+
+            DB::commit();
+            return ["status" => true, "data" => $Counselors, "message" => "counselors data fetched successfully"];
+        } catch (Exception $e) {
+            Log::warning($e);
+
+        }
+    }
+
   }
