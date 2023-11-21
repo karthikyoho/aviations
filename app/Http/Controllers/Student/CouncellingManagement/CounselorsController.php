@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
-use App\Models\Counselors;
-use App\Repositories\Student\CounselorsRepository as StudentCounselorsRepository;
+use App\Repositories\CounselorsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CounselorsController extends Controller
 {
     protected $repo;
-    public function __construct(StudentCounselorsRepository $repo)
+    public function __construct(CounselorsRepository $repo)
     {
       $this->repo = $repo;
     }
+
 
     public function createCounselors(Request $req){
         Log::warning($req);
@@ -59,5 +59,5 @@ class CounselorsController extends Controller
          $id=$req->input('id');
          return $this->repo->listbyId($id);
      }
+    
 }
-
