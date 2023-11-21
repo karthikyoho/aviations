@@ -5,7 +5,6 @@ namespace App\Repositories\Student;
 use App\Models\College;
 use App\Repositories\BaseRepositoryInterface;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -22,8 +21,15 @@ class CollegeRepository implements BaseRepositoryInterface
         try {
 
             $id = "CLGID";
-            $collegeId = self::generateUniqueAcademicId($id);
-
+            $collegeId = self::generateUniqueCollegeId($id);
+            $existingCollege = College::where('college_name', $name)
+            ->where('is_deleted', 'no')
+            ->first();
+    
+        if ($existingCollege) {
+            return ["status" => false, "message" => "'$name' already exists"];
+        }
+    
             $college = College::create([
                 'college_name' => $name,
                 'college_id' => $collegeId,
@@ -54,6 +60,8 @@ class CollegeRepository implements BaseRepositoryInterface
             return ["status" => false, 'message' => $e->getMessage()];
         }
     }
+   
+   
     public function update($req, $filePath, $gallery)
     {
         DB::beginTransaction();
@@ -100,6 +108,7 @@ class CollegeRepository implements BaseRepositoryInterface
                 $collegeData['gallery'] = $gallery;
             }
 
+            $college->save();
             DB::commit();
             return ["status" => true, "data" => $college, 'message' => 'College updated successfully'];
         } catch (\Exception $e) {
@@ -188,6 +197,7 @@ class CollegeRepository implements BaseRepositoryInterface
             $college = DB::table('colleges')
                 ->where('id', $id)
                 ->where('is_deleted', 'no')
+                ->where('is_active', 'yes')
                 ->first();
 
             if (!$college) {
@@ -203,7 +213,7 @@ class CollegeRepository implements BaseRepositoryInterface
             return ["status" => false, "message" => $e->getMessage()];
         }
     }
-    private static function generateUniqueAcademicId($prefix)
+    private static function generateUniqueCollegeId($prefix)
     {
         // Find the maximum faq_module_id with the given prefix
         $maxId = College::where('college_id', 'like', $prefix . '%')->max('college_id');

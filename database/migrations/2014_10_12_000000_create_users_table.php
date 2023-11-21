@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('registered_id')->unique();
+            $table->string('profile_image');
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('password');
@@ -27,6 +29,9 @@ return new class extends Migration
             $table->string('preferred_location2');
             $table->string('otp',6)->nullable();
             $table->enum('is_admin',['yes','no'])->default('no');
+            $table->enum('is_deleted', ['yes', 'no'])->default('no');
+            $table->enum('is_active', ['yes', 'no'])->default('no');
+          
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

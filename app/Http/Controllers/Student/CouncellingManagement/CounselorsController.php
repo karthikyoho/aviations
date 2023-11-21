@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Student\CollegeManagemet;
+namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
-use App\Models\Counselors;
 use App\Repositories\CounselorsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +14,7 @@ class CounselorsController extends Controller
     {
       $this->repo = $repo;
     }
+
 
     public function createCounselors(Request $req){
         Log::warning($req);
@@ -49,15 +49,15 @@ class CounselorsController extends Controller
 
     //  }
     //     //show All 
-    //  public function showAllCounselors(Request $req){
-    //     $search = $req->input('search', '');
-    //     return $this->repo->showAllFaqs($search);
-    // }
+      public function showAllCounselors(Request $req){
+        $search = $req->input('search', '');
+         return $this->repo->showAllCounselors($search);
+     }
 
-    //   //show  data by Id
-    // public function getFaqById(Request $req){
-    //     $id=$req->input('id');
-    //     return $this->repo->getFaqById($id);
-    // }
+    //   //show  data  by Id
+     public function listbyid(Request $req){
+         $id=$req->input('id');
+         return $this->repo->listbyId($id);
+     }
+    
 }
-
