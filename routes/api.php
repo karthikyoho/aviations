@@ -5,6 +5,7 @@ use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\StudentController;
 use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
 use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
+use App\Http\Controllers\Student\CollegeManagemet\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,14 @@ Route::prefix('college')->group(function (){
 
 
 
+});
+Route::prefix('departments')->group(function(){
+    Route::post('create',[DepartmentController::class,'createDepartment']);
+    Route::post('update',[DepartmentController::class,'updateDepartment']);
+    Route::delete('destroy',[DepartmentController::class,'deleteDepartment']);
+    Route::get('show',[DepartmentController::class,'getAllDepartment']);
+    Route::get('status',[DepartmentController::class,'departmentStatus']);
+   
 });
 
 Route::post('staff-create',[StaffController::class,'staffCreate']);
