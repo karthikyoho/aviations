@@ -39,6 +39,7 @@ Route::post('login',[AuthenticationController::class,'login']);
 Route::prefix('student')->group(function (){
   Route::post('create',[StudentController::class,'createUser']);
   Route::post('update',[StudentController::class,'updateStudent']);
+  Route::post('show',[StudentController::class,'studentShowData']);
 
 });
 

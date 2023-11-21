@@ -75,6 +75,14 @@ class StudentController extends Controller
 
    }
 
+   public function studentShowData(Request $req){
+    {
+        $search = $req->input('search', '');
+        return $this->repo->studentShowData($search);
+    }
+
+   }
+
 
 
 
