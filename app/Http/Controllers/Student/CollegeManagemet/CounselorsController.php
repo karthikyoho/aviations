@@ -54,7 +54,7 @@ class CounselorsController extends Controller
          return $this->repo->showAllCounselors($search);
      }
 
-    //   //show  data by Id
+    //   //show  data  by Id
      public function listbyid(Request $req){
          $id=$req->input('id');
          return $this->repo->listbyId($id);
