@@ -17,7 +17,7 @@ class CourseRepository implements BaseRepositoryInterface
         //
     }
                     //create AcademicTermsCondition
-                    public function create($college_id,$department_id,$name,$description,$course_duraton,$filePath)
+                    public function create($college_id,$department_id,$name,$description,$course_duration,$total_seats,$available_seats,$filePath)
                     {
                         DB::beginTransaction();
                     
@@ -41,9 +41,17 @@ class CourseRepository implements BaseRepositoryInterface
                                 DB::rollBack();
                                 return ["status" => false, "message" => "description is mandatory"];
                             }
-                            if (!$course_duraton) {
+                            if (!$course_duration) {
                                 DB::rollBack();
-                                return ["status" => false, "message" => "course_duraton is mandatory"];
+                                return ["status" => false, "message" => "course_duration is mandatory"];
+                            }
+                            if (!$total_seats) {
+                                DB::rollBack();
+                                return ["status" => false, "message" => "total_seats is mandatory"];
+                            }
+                            if (!$available_seats) {
+                                DB::rollBack();
+                                return ["status" => false, "message" => "available_seats is mandatory"];
                             }
                             if (!$filePath) {
                                 DB::rollBack();
@@ -74,7 +82,9 @@ class CourseRepository implements BaseRepositoryInterface
                                 "course_id"=>$course_id,
                                 "name" => $name,
                                 "description" => $description,
-                                "course_duraton" => $course_duraton,
+                                "course_duration" => $course_duration,
+                                "total_seats"=>$total_seats,
+                                "available_seats"=>$available_seats,
                                 "image" => $filePath,
                             ]);
                     
@@ -88,7 +98,7 @@ class CourseRepository implements BaseRepositoryInterface
                     }
                     
 
-                    public function update($id, $name, $description, $course_duration, $filePath)
+                    public function update($id, $name, $description, $course_duration,$available_seats,$total_seats, $filePath)
                     {
                         try {
                             if (!$id) {
@@ -112,6 +122,13 @@ class CourseRepository implements BaseRepositoryInterface
                     
                             if ($course_duration) {
                                 $course->course_duration = $course_duration;
+                            }
+                            if ($available_seats) {
+                                $course->available_seats = $available_seats;
+                            }
+
+                            if ($total_seats) {
+                                $course->total_seats = $total_seats;
                             }
                     
                             if ($filePath) {
