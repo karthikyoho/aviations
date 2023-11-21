@@ -4,11 +4,9 @@ namespace App\Repositories\Student;
 
 use App\Models\College;
 use App\Models\Department;
-use App\Models\User;
 use App\Repositories\BaseRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class DepartmentRepository implements BaseRepositoryInterface
@@ -160,3 +158,5 @@ class DepartmentRepository implements BaseRepositoryInterface
 }
 
 }
+
+
