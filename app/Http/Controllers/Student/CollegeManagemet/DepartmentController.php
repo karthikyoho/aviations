@@ -11,13 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
-    protected $repo;
-    protected $img;
-    public function __construct(DepartmentCourseRepository $repo, ImageRepository $img)
-    {
-        $this->repo = $repo;
-        $this->img = $img;
-    }
+  protected $repo;
+  protected $img;
+  public function _construct(DepartmentCourseRepository $repo,ImageRepository $img){
+    $this->repo=$repo;
+    $this->img=$img;
+  }
 
     public function createDepartment(Request $req)
     {
@@ -92,3 +91,5 @@ class DepartmentController extends Controller
   }
     
 }
+
+

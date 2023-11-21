@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
+use App\Http\Controllers\Student\CollegeManagemet\StudentController;
+use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
 use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
 use App\Http\Controllers\Student\CollegeManagemet\DepartmentController;
 use Illuminate\Http\Request;
@@ -22,13 +25,38 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
+Route::prefix('student')->group(function (){
+
 Route::post('register',[AuthenticationController::class,'register']);
+Route::post('create',[StudentController::class,'createUser']);
+Route::post('login',[AuthenticationController::class,'login']);
+
+});
+
+
+
+
+Route::post('create',[CounselorsController::class,'createCounselors']);
+Route::post('update',[CounselorsController::class,'updateCounselors']);
+Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+Route::get('showall',[CounselorsController::class,'showallCounselors']);
+Route::post('l',[CounselorsController::class,'listbyid']);
+
+
+
+
 
 Route::prefix('college')->group(function (){
 
     Route::post('create',[CollegeController::class,'create']);
     Route::post('update',[CollegeController::class,'update']);
     Route::post('delete',[CollegeController::class,'delete']);
+    Route::get('show',[CollegeController::class,'show']);
+    Route::post('status',[CollegeController::class,'status']);
+    Route::get('get-college-by-id',[CollegeController::class,'getCollegeById']);
+
 
 
 
@@ -42,3 +70,4 @@ Route::prefix('departments')->group(function(){
    
 });
 
+Route::post('staff-create',[StaffController::class,'staffCreate']);
