@@ -71,4 +71,16 @@ Route::prefix('departments')->group(function(){
    
 });
 
+
+Route::prefix('courses')->group(function(){
+    Route::post('create',[CourseController::class,'create']);
+    Route::post('update',[CourseController::class,'update']);
+    Route::delete('destroy',[CourseController::class,'delete']);
+    Route::get('show',[CourseController::class,'show']);
+    Route::post('status',[CourseController::class,'status']);
+    Route::get('getCourseById',[CourseController::class,'getCourseById']);
+
+   
+});
+
 Route::post('staff-create',[StaffController::class,'staffCreate']);

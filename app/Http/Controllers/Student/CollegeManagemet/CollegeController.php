@@ -16,6 +16,7 @@ class CollegeController extends Controller
     public function __construct(CollegeRepository $repo,ImageRepository $img)
     {
       $this->repo=$repo;
+      
       $this->img=$img;
     }
      

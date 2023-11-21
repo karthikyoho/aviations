@@ -87,6 +87,145 @@ class CourseRepository implements BaseRepositoryInterface
                         }
                     }
                     
+
+                    public function update($id, $name, $description, $course_duration, $filePath)
+                    {
+                        try {
+                            if (!$id) {
+                                DB::rollBack();
+                                return ["status" => false, "message" => "id is mandatory"];
+                            }
+                    
+                            $course = Course::find($id);
+                    
+                            if (!$course) {
+                                DB::rollBack();
+                                return ["status" => false, "message" => "Course Data is not available"];                            }
+                    
+                            if ($name) {
+                                $course->name = $name;
+                            }
+                    
+                            if ($description) {
+                                $course->description = $description;
+                            }
+                    
+                            if ($course_duration) {
+                                $course->course_duration = $course_duration;
+                            }
+                    
+                            if ($filePath) {
+                                $course->image = $filePath;
+                            }
+                    
+                            $course->save();
+                    
+                            return ["status" => true, "message" => "$id updated successfully"];
+                        } catch (\Exception $e) {
+                            Log::warning($e);
+                    
+                            return ["status" => false, "message" => $e->getMessage()];
+                        }
+                    }
+
+                    public function delete($id)
+                    {
+                        DB::beginTransaction();
+                        try {
+                            if (!$id) {
+                                DB::rollBack();
+                                return ["status" => false, "message" => "id is mandatory"];
+                            }
+                
+                            $course= Course::find($id)->update(['is_deleted' => 'yes']);
+                            DB::commit();
+                            return ["status" => true, "data" => [$course], "message" => "deleted successfully"];
+                        } catch (Exception $th) {
+                            Log::warning($th);
+                            DB::rollBack();
+                            return ["status" => false, "message" => $th->getMessage()];
+                        }
+                    }
+
+                    public function show($search)
+                    {
+                        DB::beginTransaction();
+                        try {
+                
+                            $course = Course::where('is_deleted', 'no')->where('is_active', 'yes')->when($search, function ($query) use ($search) {
+                                $query->where('name', 'like', '%' . $search . '%');
+                            })->paginate(60);
+                            return ["status" => true, "data" => $course, "message" => "Course data displayed successfully"];
+                        } catch (Exception $e) {
+                            Log::warning($e);
+                            DB::rollBack();
+                            return ["status" => false, "message" => $e->getMessage()];
+                        }
+                    }
+                
+                    
+    public function status($id, $status)
+    {
+        DB::beginTransaction();
+        try {
+            if (!$id) {
+                DB::rollBack();
+                return ["status" => false, "message" => "Id is mandatory"];
+            }
+            if (!$status) {
+                DB::rollBack();
+                return ["status" => false, "message" => "Status is mandatory"];
+            }
+    
+            $course =Course::find($id);
+    
+            if (!$course) {
+                DB::rollBack();
+                return ["status" => false, "message" => "Data not found"];
+            }
+    
+            $course->update(['is_active' => $status]);
+            $course->refresh();  
+    
+            DB::commit();
+    
+            return ["status" => true, "data" => [], "message" => "course status updated successfully"];
+        } catch (Exception $th) {
+            Log::warning($th);
+            DB::rollBack();
+            return ["status" => false, "message" => $th->getMessage()];
+        }
+    }
+
+    
+    public function getCourseById($id)
+    {
+        DB::beginTransaction();
+        try {
+            if (!$id) {
+                DB::rollBack();
+                return ["status" => false, "message" => "id is mandatory"];
+            }
+            $course = DB::table('courses')
+                ->where('id', $id)
+                ->where('is_deleted', 'no')
+                ->where('is_active', 'yes')
+                ->first();
+
+            if (!$course) {
+                DB::rollBack();
+                return ["status" => false, "message" => "Id is invalid"];
+            }
+
+            DB::commit();
+            return ["status" => true, "data" => $course, "message" => "courses data fetched successfully"];
+        } catch (Exception $e) {
+            Log::warning($e);
+            DB::rollBack();
+            return ["status" => false, "message" => $e->getMessage()];
+        }
+    }
+                             
     private static function generateUniqueCourseId($prefix)
     {
         // Find the maximum faq_module_id with the given prefix

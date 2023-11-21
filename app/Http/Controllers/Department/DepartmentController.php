@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Student\CollegeManagemet;
+namespace App\Http\Controllers\Department;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Repositories\ImageRepository;
 use App\Repositories\Student\DepartmentCourseRepository;
-use Illuminate\Http\Request;
+use App\Repositories\Student\DepartmentRepository;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
+
 class DepartmentController extends Controller
 {
-  protected $repo;
-  protected $img;
-  public function _construct(DepartmentCourseRepository $repo,ImageRepository $img){
-    $this->repo=$repo;
-    $this->img=$img;
-  }
+    
+    protected $repo;
+    protected $img;
+    public function __construct(DepartmentCourseRepository $repo,ImageRepository $img)
+    {
+      $this->repo=$repo;
+      $this->img=$img;
+    }
 
   public function createDepartment(Request $req)
   {
