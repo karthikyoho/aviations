@@ -20,7 +20,7 @@ class CollegeController extends Controller
     }
      
     //create College
-    public function create(Request $req)
+    public function  create(Request $req)
     {
         try {
             $name = $req->input('college_name');
@@ -145,6 +145,6 @@ class CollegeController extends Controller
         $id=$req->input('id');
         return $this->repo->getCollegeById($id);
     }
-
-
+ 
+  
 }

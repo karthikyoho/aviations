@@ -4,6 +4,7 @@ use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\StudentController;
 use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
 use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
+use App\Http\Controllers\Student\CollegeManagemet\CourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,10 +47,15 @@ Route::prefix('college')->group(function (){
     Route::post('status',[CollegeController::class,'status']);
     Route::get('get-college-by-id',[CollegeController::class,'getCollegeById']);
 
-
-
-
-
-
 });
 
+Route::prefix('course')->group(function (){
+
+    Route::post('create',[CourseController::class,'create']);
+    Route::post('update',[CourseController::class,'update']);
+    Route::post('delete',[CourseController::class,'delete']);
+    Route::get('show',[CourseController::class,'show']);
+    Route::post('status',[CourseController::class,'status']);
+    Route::get('get-course-by-id',[CourseController::class,'getCourseById']);
+
+});
