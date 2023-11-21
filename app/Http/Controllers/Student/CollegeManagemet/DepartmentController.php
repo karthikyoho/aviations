@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Student\CollegeManagemet;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ImageRepository;
+use App\Repositories\Student\DepartmentCourseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
@@ -16,76 +19,76 @@ class DepartmentController extends Controller
         $this->img = $img;
     }
 
-    public function createdepartment(Request $req)
+    public function createDepartment(Request $req)
     {
       Log::warning($req);
-      $college_id = $req->input('college_id');
-      $name = $req->input('name');
-      $department_id = $req->input('department_id');
-      $description = $req->input('description');
-  
-      $imgPath = "assets/departments/images";
-      $filePath = "";
-  
-  
-      if ($req->hasFile('image')) {
+
+      $validator = Validator::make($req->all(), [
+        'college_id' => 'required',
+        'name' => 'required|unique:departments',
+        'description' => 'required',
+    ]);
+
+    $imgPath = "assets/departments/images";
+    $filePath = "";
+
+    if ($req->hasFile('image')) {
         $filePath = $this->img->uploadImage($req->file('image'), $imgPath);
-      }
+    }
+
+    if ($validator->fails()) {
+        return ['status' => false, 'message' => 'Validation fails'];
+    }
   
-  
-      return $this->repo->createdepartment($college_id ,$name ,$department_id , $description,$filePath);
+      return $this->repo->createDepartment($req->all(),$filePath);
     }
    
-    public function update(Request $req)
+    public function updateDepartment(Request $request)
   { 
-    Log::warning($req);
-
-      $id = $req->input('id');
-      $name = $req->input('name');
-      $description = $req->input('description');
-
-      $imgPath = "assets/departments/images";
-      $filePath = "";
-
-      if ($req->hasFile('img')) {
-        $filePath = $this->img->uploadImage($req->file('img'), $imgPath);
-      }
-      return $this->repo->update($id,$name,$description,$filePath);
+    Log::warning($request);
+      $data = $request->all();
+        $InstituteImgPath = "assets/departments/image";
+        $filePath = "";
+        if ($request->hasFile('image')) {
+            $filePath = $this->img->uploadImage($request->file('image'), $InstituteImgPath);
+        }
+            return $this->repo->updateDepartment($request->all(),$filePath);
     }
   
 
-  public function delete(Request $req)
-  {
-    Log::warning($req);
-    $id = $req->input('id');
-    return $this->repo->delete($id);
-  }
+    public function deleteDepartment(Request $req){
 
+  
+  
+            Log::warning($req);
+    
+            $id = $req->input('id');
+    
+            return  $this->repo->deleteDepartment($id);
+    }
  
 
-  public function getAll(Request $req)
+  public function getAllDepartment(Request $req)
   {
     Log::warning($req);
     $search = $req->input('search', '');
-    return $this->repo->getAll($search);
+    return $this->repo->getAllDepartment($search);
   }
 
    
-  public function status(Request $req)
+  public function departmentStatus(Request $req)
   {
-    Log::warning($req);
-    $id = $req->input('id');
-    $status = $req->input('status');
-    return $this->repo->status($id, $status);
-  }
-
-
+      // Validate input
+      $validator = Validator::make($req->all(), [
+          'id' => 'required',
+          'status' => 'required|in:yes,no',
+      ]);
   
-
-  public function listById(Request $req)
-  {
-    Log::warning($req);
-    $id = $req->input('id');
-    return $this->repo->listById($id);
+      if ($validator->fails()) {
+          return response()->json(['status' => false, 'message' => $validator->errors()->first()]);
+      }
+  
+      return $this->repo->departmentStatus($req->input('id'), $req->input('status'));
   }
+    
 }
