@@ -5,6 +5,7 @@ use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
 use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
+use App\Http\Controllers\Student\CouncellingManagement\CouncellingAppointmentsController;
 use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,3 +84,15 @@ Route::prefix('courses')->group(function(){
 });
 
 Route::post('staff-create',[StaffController::class,'staffCreate']);
+
+
+
+Route::prefix('appointments')->group(function(){
+    Route::get('create',[CouncellingAppointmentsController::class,'createAppointment']);
+    Route::get('update',[CouncellingAppointmentsController::class,'updateAppointment']);
+    Route::get('delete',[CouncellingAppointmentsController::class,'delete']);
+    Route::get('show',[CouncellingAppointmentsController::class,'show']);
+    Route::get('get-appointment-by-id',[CouncellingAppointmentsController::class,'getCouncellingAppointmentById']);
+
+
+});
