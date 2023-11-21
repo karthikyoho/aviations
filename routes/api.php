@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
-use App\Http\Controllers\Student\CollegeManagemet\StudentController;
-use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
-use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
+use App\Http\Controllers\Student\CouncellingManagement\StudentController;
+use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
+use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +42,17 @@ Route::prefix('student')->group(function (){
 
 });
 
+
 Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
 Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+Route::get('showall',[CounselorsController::class,'showallCounselors']);
+Route::post('listbyid',[CounselorsController::class,'listbyid']);
+
+
+Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
+
+
 
 
 
@@ -58,6 +68,26 @@ Route::prefix('college')->group(function (){
 
 
 
+});
+Route::prefix('departments')->group(function(){
+    Route::post('create',[DepartmentController::class,'createDepartment']);
+    Route::post('update',[DepartmentController::class,'updateDepartment']);
+    Route::delete('destroy',[DepartmentController::class,'deleteDepartment']);
+    Route::get('show',[DepartmentController::class,'getAllDepartment']);
+    Route::get('status',[DepartmentController::class,'departmentStatus']);
+   
+});
+
+
+Route::prefix('courses')->group(function(){
+    Route::post('create',[CourseController::class,'create']);
+    Route::post('update',[CourseController::class,'update']);
+    Route::delete('destroy',[CourseController::class,'delete']);
+    Route::get('show',[CourseController::class,'show']);
+    Route::post('status',[CourseController::class,'status']);
+    Route::get('getCourseById',[CourseController::class,'getCourseById']);
+
+   
 });
 
 Route::post('staff-create',[StaffController::class,'staffCreate']);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student\CollegeManagemet;
+namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ImageRepository;
@@ -16,11 +16,12 @@ class CollegeController extends Controller
     public function __construct(CollegeRepository $repo,ImageRepository $img)
     {
       $this->repo=$repo;
+      
       $this->img=$img;
     }
      
     //create College
-    public function create(Request $req)
+    public function  create(Request $req)
     {
         try {
             $name = $req->input('college_name');
@@ -145,6 +146,6 @@ class CollegeController extends Controller
         $id=$req->input('id');
         return $this->repo->getCollegeById($id);
     }
-
-
+ 
+  
 }

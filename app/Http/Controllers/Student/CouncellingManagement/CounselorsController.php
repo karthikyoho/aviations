@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Student\CollegeManagemet;
+namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
 use App\Models\Counselors;
-use App\Repositories\CounselorsRepository;
+use App\Repositories\Student\CounselorsRepository as StudentCounselorsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CounselorsController extends Controller
 {
     protected $repo;
-    public function __construct(CounselorsRepository $repo)
+    public function __construct(StudentCounselorsRepository $repo)
     {
       $this->repo = $repo;
     }
@@ -49,15 +49,15 @@ class CounselorsController extends Controller
 
     //  }
     //     //show All 
-    //  public function showAllCounselors(Request $req){
-    //     $search = $req->input('search', '');
-    //     return $this->repo->showAllFaqs($search);
-    // }
+      public function showAllCounselors(Request $req){
+        $search = $req->input('search', '');
+         return $this->repo->showAllCounselors($search);
+     }
 
-    //   //show  data by Id
-    // public function getFaqById(Request $req){
-    //     $id=$req->input('id');
-    //     return $this->repo->getFaqById($id);
-    // }
+    //   //show  data  by Id
+     public function listbyid(Request $req){
+         $id=$req->input('id');
+         return $this->repo->listbyId($id);
+     }
 }
 
