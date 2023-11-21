@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student\CollegeManagemet;
+namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ImageRepository;

@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
-use App\Http\Controllers\Student\CollegeManagemet\StudentController;
-use App\Http\Controllers\Student\CollegeManagemet\CounselorsController;
-use App\Http\Controllers\Student\CollegeManagemet\CollegeController;
-use App\Http\Controllers\Student\CollegeManagemet\DepartmentController;
+use App\Http\Controllers\Student\CouncellingManagement\StudentController;
+use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
+use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
