@@ -31,9 +31,14 @@ Route::post('create',[StudentController::class,'createUser']);
 Route::post('login',[AuthenticationController::class,'login']);
 
 
+
 Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
 Route::post('delete',[CounselorsController::class,'deleteCounselors']);
+Route::get('showall',[CounselorsController::class,'showallCounselors']);
+Route::post('l',[CounselorsController::class,'listbyid']);
+
+
 
 
 

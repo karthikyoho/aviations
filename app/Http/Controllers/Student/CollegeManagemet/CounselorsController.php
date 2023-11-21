@@ -49,15 +49,15 @@ class CounselorsController extends Controller
 
     //  }
     //     //show All 
-    //  public function showAllCounselors(Request $req){
-    //     $search = $req->input('search', '');
-    //     return $this->repo->showAllFaqs($search);
-    // }
+      public function showAllCounselors(Request $req){
+        $search = $req->input('search', '');
+         return $this->repo->showAllCounselors($search);
+     }
 
     //   //show  data by Id
-    // public function getFaqById(Request $req){
-    //     $id=$req->input('id');
-    //     return $this->repo->getFaqById($id);
-    // }
+     public function listbyid(Request $req){
+         $id=$req->input('id');
+         return $this->repo->listbyId($id);
+     }
 }
 
