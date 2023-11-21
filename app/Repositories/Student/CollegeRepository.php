@@ -60,6 +60,8 @@ class CollegeRepository implements BaseRepositoryInterface
             return ["status" => false, 'message' => $e->getMessage()];
         }
     }
+   
+   
     public function update($req, $filePath, $gallery)
     {
         DB::beginTransaction();

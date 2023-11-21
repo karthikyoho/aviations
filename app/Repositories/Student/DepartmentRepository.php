@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class DepartmentCourseRepository implements BaseRepositoryInterface
+class DepartmentRepository implements BaseRepositoryInterface
 {
     public function all()
     {

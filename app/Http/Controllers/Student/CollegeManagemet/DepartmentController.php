@@ -18,37 +18,29 @@ class DepartmentController extends Controller
     $this->img=$img;
   }
 
-  public function createDepartment(Request $req)
-  {
-      // Log the request for debugging purposes
+    public function createDepartment(Request $req)
+    {
       Log::warning($req);
-  
-      // Validate the request data
+
       $validator = Validator::make($req->all(), [
-          'college_id' => 'required',
-          'name' => 'required|unique:departments',
-          'description' => 'required',
-      ]);
+        'college_id' => 'required',
+        'name' => 'required|unique:departments',
+        'description' => 'required',
+    ]);
+
+    $imgPath = "assets/departments/images";
+    $filePath = "";
+
+    if ($req->hasFile('image')) {
+        $filePath = $this->img->uploadImage($req->file('image'), $imgPath);
+    }
+
+    if ($validator->fails()) {
+        return ['status' => false, 'message' => 'Validation fails'];
+    }
   
-      // Set the default image path
-      $imgPath = "assets/departments/images";
-      $filePath = "";
-  
-      // Check if an image file is present in the request
-      if ($req->hasFile('image')) {
-          // Assuming $this->img is an instance of a class with an uploadImage() method
-          $filePath = $this->img->uploadImage($req->file('image'), $imgPath);
-      }
-  
-      // Check if validation fails
-      if ($validator->fails()) {
-          return ['status' => false, 'message' => 'Validation fails'];
-      }
-  
-      // Call the createDepartment method on $this->repo and pass request data and image path
-      return $this->repo->createDepartment($req->all(), $filePath);
-  }
-  
+      return $this->repo->createDepartment($req->all(),$filePath);
+    }
    
     public function updateDepartment(Request $request)
   { 
@@ -99,3 +91,5 @@ class DepartmentController extends Controller
   }
     
 }
+
+
