@@ -74,7 +74,7 @@ class CourseRepository implements BaseRepositoryInterface
                                 "course_id"=>$course_id,
                                 "name" => $name,
                                 "description" => $description,
-                                "course_duraton" => $course_duraton,
+                                "course_duration" => $course_duraton,
                                 "image" => $filePath,
                             ]);
                     
