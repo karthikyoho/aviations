@@ -41,6 +41,7 @@ Route::post('login',[AuthenticationController::class,'login']);
 Route::prefix('student')->group(function (){
   Route::post('create',[StudentController::class,'createUser']);
   Route::post('update',[StudentController::class,'updateStudent']);
+  Route::post('show',[StudentController::class,'studentShowData']);
 
 });
 
@@ -84,7 +85,7 @@ Route::prefix('departments')->group(function(){
 Route::prefix('courses')->group(function(){
     Route::post('create',[CourseController::class,'create']);
     Route::post('update',[CourseController::class,'update']);
-    Route::delete('destroy',[CourseController::class,'delete']);
+    Route::post('destroy',[CourseController::class,'delete']);
     Route::get('show',[CourseController::class,'show']);
     Route::post('status',[CourseController::class,'status']);
     Route::get('getCourseById',[CourseController::class,'getCourseById']);
