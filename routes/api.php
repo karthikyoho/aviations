@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CollegeManagemet\StudentController;
@@ -42,7 +43,10 @@ Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
 Route::post('delete',[CounselorsController::class,'deleteCounselors']);
 Route::get('showall',[CounselorsController::class,'showallCounselors']);
-Route::post('l',[CounselorsController::class,'listbyid']);
+Route::post('listbyid',[CounselorsController::class,'listbyid']);
+
+
+Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 

@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Student\CollegeManagemet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Counselors;
-use App\Repositories\CounselorsRepository;
+use App\Repositories\Student\CounselorsRepository as StudentCounselorsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CounselorsController extends Controller
 {
     protected $repo;
-    public function __construct(CounselorsRepository $repo)
+    public function __construct(StudentCounselorsRepository $repo)
     {
       $this->repo = $repo;
     }
