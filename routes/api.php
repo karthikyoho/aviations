@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\counseling_appointmentscontroller;
+use App\Http\Controllers\ProfileManagement\ProfileController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
@@ -107,3 +108,5 @@ Route::prefix('appointments')->group(function(){
 
 
 });
+
+Route::get("get-student-by-userid",[ProfileController::class,'getStudentByUserId']);
