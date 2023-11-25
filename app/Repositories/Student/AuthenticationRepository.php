@@ -25,10 +25,9 @@ class AuthenticationRepository implements BaseRepositoryInterface
                 'phone' => $request['phone'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
-
                 'address_line1' => $request['address_line1'],
                 'address_line2' => $request['address_line2'],
-
+ 
                 '1st_priority' => $request['1st_priority'],
                 '2nd_priority' => $request['2nd_priority'],
                 '3rd_priority' => $request['3rd_priority'],
