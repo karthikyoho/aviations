@@ -114,7 +114,7 @@ class DepartmentRepository implements BaseRepositoryInterface
     
 
     public function getAllDepartment($search)
-    {
+    { 
         try {
             $query = Department::query();
 

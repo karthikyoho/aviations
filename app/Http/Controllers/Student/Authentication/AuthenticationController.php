@@ -29,13 +29,20 @@ class AuthenticationController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|string|unique:users,email',
                 'phone' => 'required|unique:users,phone',
-                'password' => 'required',
+                // 'password' => 'required',
             ]);
 
             $validator->validate();
 
+            $ImgPath = "assets/user";
+            $filePath = "";
+            if ($request->hasFile('profile_image')) {
+                $filePath = $this->img->uploadImage($request->file('profile_image'), $ImgPath);
+            }
+            $validator->validate();
+
            
-            return $this->repo->createUser($request->all());
+            return $this->repo->createUser($request->all(),$filePath);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {

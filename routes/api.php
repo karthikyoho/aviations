@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\counseling_appointmentscontroller;
+use App\Http\Controllers\ProfileManagement\BannerController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
 // use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
+use App\Http\Controllers\Student\CouncellingManagement\CouncellingAppointmentsController;
 use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CourseController;
 use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
@@ -55,7 +57,7 @@ Route::get('showall',[CounselorsController::class,'showallCounselors']);
 Route::post('listbyid',[CounselorsController::class,'listbyid']);
 
 
-Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
+// Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 
@@ -87,7 +89,7 @@ Route::prefix('departments')->group(function(){
 Route::prefix('courses')->group(function(){
     Route::post('create',[CourseController::class,'create']);
     Route::post('update',[CourseController::class,'update']);
-    Route::delete('destroy',[CourseController::class,'delete']);
+    Route::post('destroy',[CourseController::class,'delete']);
     Route::get('show',[CourseController::class,'show']);
     Route::post('status',[CourseController::class,'status']);
     Route::get('getCourseById',[CourseController::class,'getCourseById']);
@@ -95,4 +97,47 @@ Route::prefix('courses')->group(function(){
    
 });
 
+
+Route::prefix('Staff-Management')->group(function(){
+
 Route::post('staff-create',[StaffController::class,'staffCreate']);
+
+Route::post('staff-update',[StaffController::class,'updateStaff']);
+
+Route::post('delete-update',[StaffController::class,'deleteStaff']);
+
+Route::get('show',[StaffController::class,'show']);
+
+Route::post('status',[StaffController::class,'status']);
+
+Route::get('get-staff-by-id',[StaffController::class,'getStaffById']);
+
+
+});
+
+
+
+
+
+
+Route::prefix('appointments')->group(function(){
+    Route::get('create',[CouncellingAppointmentsController::class,'createAppointment']);
+    Route::get('update',[CouncellingAppointmentsController::class,'updateAppointment']);
+    Route::get('delete',[CouncellingAppointmentsController::class,'delete']);
+    Route::get('show',[CouncellingAppointmentsController::class,'show']);
+    Route::get('get-appointment-by-id',[CouncellingAppointmentsController::class,'getCouncellingAppointmentById']);
+
+
+});
+
+Route::prefix('profile-management')->group(function(){
+
+    Route::post('create',[BannerController::class,'create']);
+    Route::post('update',[BannerController::class,'update']);
+    Route::delete('delete',[BannerController::class,'delete']);
+    Route::post('getall',[BannerController::class,'getall']);
+    Route::post('status',[BannerController::class,'status']);
+    Route::get('getbyid',[BannerController::class,'getbyid']);
+    
+
+});
