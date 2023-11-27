@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreign('college_id')->references('id')->on('colleges')->onDelete('cascade');
             $table->double('rating', 10, 2); // Change data type to double(10,2)
             $table->text('comment')->nullable();
+            $table->enum('is_deleted', ['yes', 'no'])->default('no');
+            $table->enum('is_active', ['yes', 'no'])->default('yes');
+          
             $table->timestamps();
 
            });
