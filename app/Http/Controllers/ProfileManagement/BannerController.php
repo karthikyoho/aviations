@@ -33,7 +33,7 @@ class BannerController extends Controller
     
             if ($req->hasFile('image_path')) {
                 foreach ($req->file('image_path') as $file) {
-                    $filePath = $this->img->uploadImage($file, $BannerImgPath);
+                    $filePath = $this->img->uploadImage($file,$BannerImgPath);
     
                     if (!empty($filePath)) {
                         $filePaths[] = $filePath;

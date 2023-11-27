@@ -43,7 +43,9 @@ Route::post('login',[AuthenticationController::class,'login']);
 Route::prefix('student')->group(function (){
   Route::post('create',[StudentController::class,'createUser']);
   Route::post('update',[StudentController::class,'updateStudent']);
-  Route::post('show',[StudentController::class,'studentShowData']);
+  Route::get('show',[StudentController::class,'studentShowData']);
+  Route::get('get-student-by-id',[StudentController::class,'studentGetData']);
+  Route::delete('student-delete-data',[StudentController::class,'studentDeleteData']);
 
 });
 
@@ -130,6 +132,8 @@ Route::prefix('appointments')->group(function(){
 
 Route::prefix('profile-management')->group(function(){
 
+    Route::prefix('banner')->group(function(){
+
     Route::post('create',[BannerController::class,'create']);
     Route::post('update',[BannerController::class,'update']);
     Route::delete('delete',[BannerController::class,'delete']);
@@ -139,3 +143,7 @@ Route::prefix('profile-management')->group(function(){
     
 
 });
+});
+
+
+

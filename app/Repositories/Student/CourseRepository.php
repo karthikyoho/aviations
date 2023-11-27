@@ -53,6 +53,7 @@ class CourseRepository implements BaseRepositoryInterface
                                 DB::rollBack();
                                 return ["status" => false, "message" => "available_seats is mandatory"];
                             }
+                            
                             if (!$filePath) {
                                 DB::rollBack();
                                 return ["status" => false, "message" => "filePath is mandatory"];
