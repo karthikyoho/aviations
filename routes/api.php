@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\ProfileManagement\BannerController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
-// use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
 use App\Http\Controllers\Student\CouncellingManagement\CouncellingAppointmentsController;
-use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+
 use App\Http\Controllers\Student\CouncellingManagement\CourseController;
 use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
@@ -46,6 +45,7 @@ Route::prefix('student')->group(function (){
   Route::get('show',[StudentController::class,'studentShowData']);
   Route::get('get-student-by-id',[StudentController::class,'studentGetData']);
   Route::delete('student-delete-data',[StudentController::class,'studentDeleteData']);
+  Route::post('verify-student',[StudentController::class,'verifyStudent']);
 
 });
 
@@ -56,8 +56,6 @@ Route::post('delete',[CounselorsController::class,'deleteCounselors']);
 Route::get('showall',[CounselorsController::class,'showallCounselors']);
 Route::post('listbyid',[CounselorsController::class,'listbyid']);
 
-
-// Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 

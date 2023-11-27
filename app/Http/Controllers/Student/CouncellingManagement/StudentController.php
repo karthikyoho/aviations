@@ -87,9 +87,20 @@ class StudentController extends Controller
     }
 
 
-    public function studentGetData(Request $req)
+    public function studentGetData(Request $req)   
+    
     {
         $id = $req->input('id');
         return $this->repo->studentGetData($id);
+    }
+
+
+
+    public function verifyStudent(Request $req){
+        $studentId = $req->input('stu_id');
+        $tenthMark = $req->input('10th_mark');
+        $twelthMark = $req->input('12th_mark');
+
+        return $this->repo->verifyStudent($studentId,$tenthMark,$twelthMark);
     }
 }
