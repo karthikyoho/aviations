@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class BannerController extends Controller
 {
+   
     protected $repo;
     protected $img;
     public function __construct(BannerRepository $repo,ImageRepository $img)

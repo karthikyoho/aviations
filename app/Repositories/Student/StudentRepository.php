@@ -52,7 +52,7 @@ class StudentRepository implements BaseRepositoryInterface
             ]);
             $student->save();
             DB::commit();
-            return ["status" => true, "data" => $student, 'message' => 'College created successfully'];
+            return ["status" => true, "data" => $student, 'message' => 'student created successfully'];
         } catch (\Exception $e) {
             Log::warning($e);
             DB::rollBack();
@@ -123,6 +123,54 @@ class StudentRepository implements BaseRepositoryInterface
                 }
             }
         
+            public function studentDeleteData($id) //COURSES DELETE FUNCTION
+            {
+                Log::warning($id);
+                DB::beginTransaction();
+                try {
+        
+                    if (!$id) {
+                        DB::rollBack();
+                        return ["return" => false, "message" => "stduent ID is mandatory"];
+                    }
+        
+                    $check = Student::find($id)->update(['is_deleted'=>'yes']);
+                    DB::commit();
+                    return ["status" => true, "data" => [$check], "message" => "deleted successfully"];
+                } catch (Exception $th) {
+                    Log::warning($th);
+                    DB::rollBack();
+                    return ["status" => false, "message" => $th->getMessage()];
+                }
+            }
+
+
+        public function studentGetData($id)
+            {
+                Log::warning($id);
+                DB::beginTransaction();
+                try {
+        
+                    if (!$id) {
+                        DB::rollBack();
+                        return ["status" => false, "message" => "course  ID is mandatory"];
+                    }
+                    $departments = "select*from courses where id=$id and is_deleted='no'";
+                    $department = DB::select($departments);
+                    $departmentcount = count($department);
+                    if (!($departmentcount)) {
+                        DB::rollBack();
+                        return ["status" => false, "message" => "Id is invalid"];
+                    }
+                    DB::commit();
+                    return ["status" => true, "data" => $department, "message" => "categoryId data fetched successfully"];
+                } catch (Exception $e) {
+                    DB::rollBack();
+                    return ["status" => false, "message" => $e->getMessage()];
+                }
+            }
+
+
 
         }
     
