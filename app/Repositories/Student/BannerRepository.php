@@ -32,7 +32,7 @@ class BannerRepository implements BaseRepositoryInterface
                 // Handle json_encode failure
                 DB::rollBack();
                 return ["status" => false, "message" => "Failed to encode image paths to JSON"];
-            }
+            }    
     
             $banner = Banner::create([
                 'title' => $title,
@@ -84,7 +84,7 @@ class BannerRepository implements BaseRepositoryInterface
             return ["status" => true, "message" => "$id updated successfully"];
         } catch (Exception $e) {
             Log::warning($e);
-            DB::rollBack();
+            DB::rollBack();     
             return ["status" => false, "message" => $e->getMessage()];
         }
     }
