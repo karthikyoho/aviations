@@ -130,6 +130,8 @@ Route::prefix('appointments')->group(function(){
 
 Route::prefix('profile-management')->group(function(){
 
+    Route::prefix('banner')->group(function(){
+
     Route::post('create',[BannerController::class,'create']);
     Route::post('update',[BannerController::class,'update']);
     Route::delete('delete',[BannerController::class,'delete']);
@@ -139,3 +141,7 @@ Route::prefix('profile-management')->group(function(){
     
 
 });
+});
+
+
+
