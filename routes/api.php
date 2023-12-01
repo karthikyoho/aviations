@@ -161,5 +161,8 @@ Route::get('getbyid',[RatingController::class,'listbyid']);
 Route::prefix('available-seats')->group(function(){
 
     Route::post('seat-create',[AvailableSeatsController::class,'create']);
+    Route::post('seat-update',[AvailableSeatsController::class,'update']);
+    Route::delete('seat-delete',[AvailableSeatsController::class,'delete']);
+
 });
 
