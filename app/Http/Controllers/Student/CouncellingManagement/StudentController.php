@@ -26,23 +26,23 @@ class StudentController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string',
-                'user_id'=>'required',
+                'user_id' => 'required',
                 'last_name' => 'required|string|unique:users,email',
-                
+
             ]);
 
             $imagePath = [];
             $imageDirectory = "assets/college_management/students/files";
-            if($request->hasFile('files')){
+            if ($request->hasFile('files')) {
                 $productFiles = $request->file('files');
-                foreach($productFiles as $key => $value){
-                    $imagePath[] = $this->img->uploadImage($value,$imageDirectory);
+                foreach ($productFiles as $key => $value) {
+                    $imagePath[] = $this->img->uploadImage($value, $imageDirectory);
                 }
             }
 
             $validator->validate();
 
-            return $this->repo->createStudent($request->all(),$imagePath);
+            return $this->repo->createStudent($request->all(), $imagePath);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
@@ -51,43 +51,56 @@ class StudentController extends Controller
     }
 
 
-   public function updateStudent(Request $req){
-    Log::warning($req);
-    try{
-    $validator = Validator::make($req->all(), [
-        'student_id' => 'required',        
-    ]);
-    $imagePath = [];
-    $imageDirectory = "assets/college_management/students/files";
-    if($req->hasFile('files')){
-        $productFiles = $req->file('files');
-        foreach($productFiles as $key => $value){
-            $imagePath[] = $this->img->uploadImage($value,$imageDirectory);
+    public function updateStudent(Request $req)
+    {
+        Log::warning($req);
+        try {
+            $validator = Validator::make($req->all(), [
+                'student_id' => 'required',
+            ]);
+            $imagePath = [];
+            $imageDirectory = "assets/college_management/students/files";
+            if ($req->hasFile('files')) {
+                $productFiles = $req->file('files');
+                foreach ($productFiles as $key => $value) {
+                    $imagePath[] = $this->img->uploadImage($value, $imageDirectory);
+                }
+            }
+            $validator->validate();
+
+            return $this->repo->updateStudent($req->all(), $imagePath);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
-    $validator->validate();
 
-    return $this->repo->updateStudent($req->all(),$imagePath);
-    }catch (ValidationException $e) {
-        return response()->json(['errors' => $e->errors()], 422);
-    }
-
-
-   }
-
-   public function studentShowData(Request $req)
+    public function studentShowData(Request $req)
     {
         $search = $req->input('search', '');
         return $this->repo->studentShowData($search);
     }
 
-   
+    public function studentDeleteData(Request $req)
+    {
+        $id = $req->input('id');
+       return $this->repo->studentDeleteData($id);
+    }
+
+
+    public function studentGetData(Request $req)   
+    
+    {
+        $id = $req->input('id');
+        return $this->repo->studentGetData($id);
+    }
 
 
 
+    public function verifyStudent(Request $req){
+        $studentId = $req->input('stu_id');
+        $tenthMark = $req->input('10th_mark');
+        $twelthMark = $req->input('12th_mark');
 
-
-
-
-
+        return $this->repo->verifyStudent($studentId,$tenthMark,$twelthMark);
+    }
 }

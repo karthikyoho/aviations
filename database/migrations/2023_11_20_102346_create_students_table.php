@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('father_name');
-            $table->string('mother_name');
+            $table->string('mother_name');  
             $table->string('father_occupation');
             $table->float('height')->nullable();
             $table->float('weight')->nullable();
@@ -33,7 +33,8 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
-             $table->enum('passport',['yes','no']);
+            $table->enum('passport',['yes','no']);
+
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('is_active',['yes','no'])->default('yes');
             $table->enum('is_deleted',['yes','no'])->default('no');

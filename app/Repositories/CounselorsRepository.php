@@ -55,11 +55,21 @@ $insertQuery = "INSERT INTO Counselors (name, staff_id, email, phone, office_loc
   DB::commit();
   return ["status" => true, "data" => [], "message" => "$name,$staff_id,$email,$phone,$office_location added successfully"];
     } catch (Exception $e) {
+  
+
+       $insertQuery = "INSERT INTO Counselors (name, staff_id, email, phone, office_location) VALUES ('$name', '$staff_id', '$email', '$phone', '$office_location')";
+        $a= DB::select($insertQuery);
+      Log::warning($a);
+      DB::commit();
+      return ["status" => true, "data" => [], "message" => "$name,$staff_id,$email,$phone,$office_location added successfully"];
+       } catch (Exception $e) {
         Log::warning($e);
         DB::rollBack();
         return ["status" => false, "message" => $e->getMessage()];
     }
       
+
+    
     }
     
     public function updatecounselors($id, $name, $email, $phone,$office_location)

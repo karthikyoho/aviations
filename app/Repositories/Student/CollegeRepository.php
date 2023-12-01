@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class CollegeRepository implements BaseRepositoryInterface
 {
-    public function all()
+    public function all()       
     {
         //
     }
 
-    public function create($name, $description, $address_line_1, $city, $phone, $state, $pincode, $alternate_number, $official_website, $facebook, $linkedin, $instagram, $twitter, $filePath, $gallery)
+    public function 
+    create($name, $description, $address_line_1, $city, $phone, $state, $pincode, $alternate_number, $official_website, $facebook, $linkedin, $instagram, $twitter, $filePath, $gallery)
     {
         DB::beginTransaction();
         try {
@@ -189,7 +190,9 @@ class CollegeRepository implements BaseRepositoryInterface
     }
 
     public function getCollegeById($id)
+
     {
+
         DB::beginTransaction();
         try {
             if (!$id) {

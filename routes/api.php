@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\ProfileManagement\ProfileController;
+use App\Http\Controllers\ProfileManagement\BannerController;
+use App\Http\Controllers\RatingManagement\RatingController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
+use App\Http\Controllers\Student\CouncellingManagement\AvailableSeatsController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
-// use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
 use App\Http\Controllers\Student\CouncellingManagement\CouncellingAppointmentsController;
-use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
+
 use App\Http\Controllers\Student\CouncellingManagement\CourseController;
 use App\Http\Controllers\Student\CouncellingManagement\DepartmentController;
 use Illuminate\Http\Request;
@@ -30,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
+        
 
 Route::prefix('users')->group(function (){
 
@@ -43,7 +46,10 @@ Route::post('login',[AuthenticationController::class,'login']);
 Route::prefix('student')->group(function (){
   Route::post('create',[StudentController::class,'createStudent']);
   Route::post('update',[StudentController::class,'updateStudent']);
-  Route::post('show',[StudentController::class,'studentShowData']);
+  Route::get('show',[StudentController::class,'studentShowData']);
+  Route::get('get-student-by-id',[StudentController::class,'studentGetData']);
+  Route::delete('student-delete-data',[StudentController::class,'studentDeleteData']);
+  Route::post('verify-student',[StudentController::class,'verifyStudent']);
 
 });
 
@@ -54,8 +60,6 @@ Route::post('delete',[CounselorsController::class,'deleteCounselors']);
 Route::get('showall',[CounselorsController::class,'showallCounselors']);
 Route::post('listbyid',[CounselorsController::class,'listbyid']);
 
-
-// Route::post('create',[counseling_appointmentscontroller::class,'createCounselingAppointments']);
 
 
 
@@ -128,4 +132,36 @@ Route::prefix('appointments')->group(function(){
 
 });
 
-Route::get("get-student-by-userid",[ProfileController::class,'getStudentByUserId']);
+Route::prefix('profile-management')->group(function(){
+
+    Route::prefix('banner')->group(function(){
+
+    Route::post('create',[BannerController::class,'create']);
+    Route::post('update',[BannerController::class,'update']);
+    Route::delete('delete',[BannerController::class,'delete']);
+    Route::get('getall',[BannerController::class,'getall']);
+    Route::post('status',[BannerController::class,'status']);
+    Route::get('getbyid',[BannerController::class,'getbyid']);
+    
+
+});
+});
+
+
+Route::prefix('Ratings')->group(function(){
+
+Route::post('create',[RatingController::class,'create']);
+Route::post('update',[RatingController::class,'update']);
+Route::delete('delete',[RatingController::class,'delete']);
+Route::post('showall',[RatingController::class,'showAll']);
+Route::get('getbyid',[RatingController::class,'listbyid']);
+
+
+});
+
+
+Route::prefix('available-seats')->group(function(){
+
+    Route::post('seat-create',[AvailableSeatsController::class,'create']);
+});
+
