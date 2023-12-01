@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('description');
             $table->string('course_duration');
-            $table->unsignedBigInteger('total_seats');
-            $table->unsignedBigInteger('available_seats');
+            // $table->unsignedBigInteger('total_seats');
+            // $table->unsignedBigInteger('available_seats');
             $table->string('image');
             $table->enum('is_deleted', ['yes', 'no'])->default('no');
             $table->enum('is_active', ['yes', 'no'])->default('no');

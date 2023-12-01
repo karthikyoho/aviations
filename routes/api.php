@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileManagement\BannerController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
+use App\Http\Controllers\Student\CouncellingManagement\AvailableSeatsController;
 use App\Http\Controllers\Student\CouncellingManagement\StudentController;
 use App\Http\Controllers\Student\CouncellingManagement\CounselorsController;
 use App\Http\Controllers\Student\CouncellingManagement\CollegeController;
@@ -135,7 +136,7 @@ Route::prefix('profile-management')->group(function(){
     Route::post('create',[BannerController::class,'create']);
     Route::post('update',[BannerController::class,'update']);
     Route::delete('delete',[BannerController::class,'delete']);
-    Route::post('getall',[BannerController::class,'getall']);
+    Route::get('getall',[BannerController::class,'getall']);
     Route::post('status',[BannerController::class,'status']);
     Route::get('getbyid',[BannerController::class,'getbyid']);
     
@@ -144,4 +145,9 @@ Route::prefix('profile-management')->group(function(){
 });
 
 
+
+Route::prefix('available-seats')->group(function(){
+
+    Route::post('seat-create',[AvailableSeatsController::class,'create']);
+});
 

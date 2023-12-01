@@ -149,7 +149,7 @@ class BannerRepository implements BaseRepositoryInterface
                 DB::commit();
                 return ["status" => true, "data" => [], "message" => " active status is upadated successfully"];
             } catch (Exception $th) {
-                Log::warning($th);
+                Log::warning($th); 
                 DB::rollBack();
                 return ["status" => false, "message" => $th->getMessage()];
             }

@@ -97,7 +97,7 @@ class CounselingAppointmentsRepository implements BaseRepositoryInterface
             }
     
             $appointment->save();
-    
+             
             DB::commit();
     
             return ['status' => true, 'data' => $appointment, 'message' => 'Appointment updated successfully'];
