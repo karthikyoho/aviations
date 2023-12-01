@@ -18,10 +18,11 @@ return new class extends Migration
             $table->json('image_path');
             $table->enum('is_deleted', ['yes', 'no'])->default('no');
             $table->enum('is_active', ['yes', 'no'])->default('yes');
-          
-        
+            
             $table->timestamps();
+            
         });
+
     }
 
     /**
