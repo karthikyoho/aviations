@@ -130,11 +130,13 @@ class DepartmentRepository implements BaseRepositoryInterface
             return ['status' => false, 'message' => $e->getMessage()];
         }
     }
-    public function departmentStatus($id, $status)
-    {
+    public function  departmentStatus($id, $status)
+     {             
+
+
         DB::beginTransaction();
         try {
-            // Find department by ID
+            // Find department by ID 
             $department = Department::find($id);
     
             if (!$department) {
@@ -157,6 +159,8 @@ class DepartmentRepository implements BaseRepositoryInterface
 
 }
 
+     
+
+
+
 }
-
-

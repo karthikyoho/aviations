@@ -60,6 +60,10 @@ class DepartmentController extends Controller
   public function deleteDepartment(Request $req)
   {
 
+
+
+  
+    
     Log::warning($req);
 
     $id = $req->input('id');

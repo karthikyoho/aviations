@@ -19,7 +19,7 @@ class Department extends Model
                 $department->department_id = self::generateUniqueDepartmentId(strtoupper($department->name));
             }
         });
-    }
+    }   
 
     // Generate a unique 'college_id'
     public static function generateUniqueDepartmentId($name)

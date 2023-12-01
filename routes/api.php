@@ -1,5 +1,7 @@
-<?php
+<?php 
 
+use App\Http\Controllers\counseling_appointmentscontroller;
+use App\Http\Controllers\ProfileManagement\ProfileController;
 use App\Http\Controllers\ProfileManagement\BannerController;
 use App\Http\Controllers\RatingManagement\RatingController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
@@ -42,7 +44,7 @@ Route::post('login',[AuthenticationController::class,'login']);
 });
 
 Route::prefix('student')->group(function (){
-  Route::post('create',[StudentController::class,'createUser']);
+  Route::post('create',[StudentController::class,'createStudent']);
   Route::post('update',[StudentController::class,'updateStudent']);
   Route::get('show',[StudentController::class,'studentShowData']);
   Route::get('get-student-by-id',[StudentController::class,'studentGetData']);

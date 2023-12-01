@@ -86,7 +86,7 @@ class CollegeRepository implements BaseRepositoryInterface
                 'pincode',
                 'alternate_number',
                 'official_website',
-                'facebook',
+                'facebook',         
                 'linkedin',
                 'instagram',
                 'twitter',
@@ -129,7 +129,7 @@ class CollegeRepository implements BaseRepositoryInterface
 
             $college = College::find($id)->update(['is_deleted' => 'yes']);
             DB::commit();
-            return ["status" => true, "data" => [$college], "message" => "deleted successfully"];
+            return ["status" => true, "data" => [$college], "message" => "data deleted successfully"];
         } catch (Exception $th) {
             Log::warning($th);
             DB::rollBack();
@@ -173,7 +173,9 @@ class CollegeRepository implements BaseRepositoryInterface
                 DB::rollBack();
                 return ["status" => false, "message" => "Data not found"];
             }
-    
+     
+
+            
             $college->update(['is_active' => $status]);
             $college->refresh();  
     
@@ -227,4 +229,8 @@ class CollegeRepository implements BaseRepositoryInterface
 
         return $newId;
     }
+
+
+
+    
 }
