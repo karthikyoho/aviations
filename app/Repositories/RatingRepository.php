@@ -145,5 +145,5 @@ public function listbyId($id)
         Log::warning($e);
     }
 }
-    
+
 }
