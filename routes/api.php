@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileManagement\BannerController;
+use App\Http\Controllers\RatingManagement\RatingController;
 use App\Http\Controllers\Staff\StaffManagement\StaffController;
 use App\Http\Controllers\Student\Authentication\AuthenticationController;
 use App\Http\Controllers\Student\CouncellingManagement\AvailableSeatsController;
@@ -30,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
+        
 
 Route::prefix('users')->group(function (){
 
@@ -144,6 +145,17 @@ Route::prefix('profile-management')->group(function(){
 });
 });
 
+
+Route::prefix('Ratings')->group(function(){
+
+Route::post('create',[RatingController::class,'create']);
+Route::post('update',[RatingController::class,'update']);
+Route::delete('delete',[RatingController::class,'delete']);
+Route::post('showall',[RatingController::class,'showAll']);
+Route::get('getbyid',[RatingController::class,'listbyid']);
+
+
+});
 
 
 Route::prefix('available-seats')->group(function(){

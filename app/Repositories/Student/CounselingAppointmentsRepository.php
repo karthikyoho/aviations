@@ -21,25 +21,24 @@ class CounselingAppointmentsRepository implements BaseRepositoryInterface
     public function createAppointment($data)
     {
         try {
-            // Check if counselor data exists
-            $counselorData = Counselors::where('id', $data['counselor_id'])->first();
+        
+        $counselorData = Counselors::where('id', $data['counselor_id'])->first();
             if (!$counselorData) {
                 return ['status' => false, 'message' => 'Counselor data not found'];
             }
     
-            // Check if student data exists
-            $studentData = Student::where('student_id', $data['student_id'])->first();
+            
+        $studentData = Student::where('student_id', $data['student_id'])->first();
             if (!$studentData) {
                 return ['status' => false, 'message' => 'Student data not found'];
             }
     
-            // Check if course data exists
-            $course = Course::where('course_id', $data['course_id'])->where('is_deleted', 'no')->first();
+            
+        $course = Course::where('course_id', $data['course_id'])->where('is_deleted', 'no')->first();
             if (!$course) {
                 return ['status' => false, 'message' => 'Course data not found'];
             }
     
-            // Check if the same appointment exists with the given start time, end time, and counseling date
             $existingAppointment = CouncellingAppointment::where([
                 'counselor_id' => $data['counselor_id'],
                 'counseling_date' => $data['counseling_date'],
@@ -56,7 +55,7 @@ class CounselingAppointmentsRepository implements BaseRepositoryInterface
                 return ['status' => false, 'message' => 'Appointment time slot is not available'];
             }
     
-            // Create the appointment
+            
             $appointment = CouncellingAppointment::create([
                 'counselor_id' => $data['counselor_id'],
                 'student_id' => $data['student_id'],
@@ -80,14 +79,14 @@ class CounselingAppointmentsRepository implements BaseRepositoryInterface
         try {
             DB::beginTransaction();
     
-            // Find the appointment by id
+            
             $appointment = CouncellingAppointment::find($data['id']);
     
             if (!$appointment) {
                 return ['status' => false, 'message' => 'Appointment not found'];
             }
     
-            // Update each field if present in the data
+            
             $updatableFields = ['start_time', 'end_time', 'counseling_date', 'notes','counseling_mode'];
     
             foreach ($updatableFields as $field) {

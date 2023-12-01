@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->json('image_path');
+        Schema::create('ratings', function (Blueprint $table) {
+            $table->id();  $table->unsignedBigInteger('college_id');
+            $table->foreign('college_id')->references('id')->on('colleges')->onDelete('cascade');
+            $table->double('rating', 10, 2); // Change data type to double(10,2)
+            $table->text('comment')->nullable();
             $table->enum('is_deleted', ['yes', 'no'])->default('no');
             $table->enum('is_active', ['yes', 'no'])->default('yes');
-            
+          
             $table->timestamps();
-            
-        });
 
+           });
     }
 
     /**
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('ratings');
     }
 };
