@@ -23,8 +23,8 @@ class ProfileRepository implements BaseRepositoryInterface
                     DB::rollBack();
                     return ["status" => false, "message" => "id is mandatory"];
                 }
-                $studentByUserId = DB::table('users')
-                    ->where('id', $user_id)
+                $studentByUserId =User::
+                      where('id', $user_id)
                     ->where('is_deleted', 'no')
                     ->where('is_active', 'yes')
                     ->with('students')
@@ -35,11 +35,12 @@ class ProfileRepository implements BaseRepositoryInterface
                     return ["status" => false, "message" => "Id is invalid"];
                 }
     
-            return ["status" => true, "data" => $studentByUserId, "message" => " student data list  successfully"];
+            return ["status" => true, "data" => $studentByUserId, "message" => " student data listed by user_id successfully"];
         } catch (Exception $e) {
             Log::warning($e);
             DB::rollBack();
             return ["status" => false, "message" => $e->getMessage()];
         }
     }
+   
 }

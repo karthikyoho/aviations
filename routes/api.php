@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use App\Http\Controllers\counseling_appointmentscontroller;
 use App\Http\Controllers\ProfileManagement\ProfileController;
@@ -41,7 +41,7 @@ Route::post('login',[AuthenticationController::class,'login']);
 });
 
 Route::prefix('student')->group(function (){
-  Route::post('create',[StudentController::class,'createUser']);
+  Route::post('create',[StudentController::class,'createStudent']);
   Route::post('update',[StudentController::class,'updateStudent']);
   Route::post('show',[StudentController::class,'studentShowData']);
 
