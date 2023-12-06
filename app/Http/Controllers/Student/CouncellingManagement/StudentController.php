@@ -52,6 +52,7 @@ class StudentController extends Controller
 
 
     public function updateStudent(Request $req)
+    
     {
         Log::warning($req);
         try {

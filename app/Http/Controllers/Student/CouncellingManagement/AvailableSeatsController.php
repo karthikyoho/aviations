@@ -11,11 +11,14 @@ class AvailableSeatsController extends Controller
 {
     
     protected $repo;
+
     public function __construct(AvailableSeatsRepository $repo)
+
     {
       $this->repo=$repo;
     
     }
+
     public function create(Request $req){
         Log::warning($req);
         $course_id=$req->input('course_id');
@@ -40,7 +43,7 @@ class AvailableSeatsController extends Controller
     Log::warning($req);
     $id=$req->input('id');
     return $this->repo->delete($id);
-}
+} 
 
 
 }
