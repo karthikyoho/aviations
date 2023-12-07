@@ -5,10 +5,8 @@ namespace App\Repositories\Student;
 use App\Models\CouncellingAppointment;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use App\Models\CounselingAppointments;
 use App\Models\Counselors;
 use App\Models\Course;
-use App\Models\Staff;
 use App\Models\Student;
 use App\Repositories\BaseRepositoryInterface;
 use Illuminate\Support\Facades\Log;
@@ -167,4 +165,7 @@ class CounselingAppointmentsRepository implements BaseRepositoryInterface
             return ["status" => false, "message" => $e->getMessage()];
         }
     }
+
+
+
 }
