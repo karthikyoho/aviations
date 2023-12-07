@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ImageRepository;
-use App\Repositories\Student\DepartmentCourseRepository;
 use App\Repositories\Student\DepartmentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -65,6 +64,7 @@ class DepartmentController extends Controller
     $id = $req->input('id');
 
     return  $this->course->deleteDepartment($id);
+    
   }
 
 

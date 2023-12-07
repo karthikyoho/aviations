@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student\CouncellingManagement;
 
 use App\Http\Controllers\Controller;
-// use App\Repositories\CounselingAppointmentsRepository;
 use App\Repositories\Student\CounselingAppointmentsRepository ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -37,8 +36,9 @@ public function createAppointment(Request $req)
 }
 public function updateAppointment(Request $req){  
 {
+
     Log::warning($req);
-    $data = $req->all();   
+    $data = $req->all();
     return $this->repo->updateAppointment($req->all());
     
 }

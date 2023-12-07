@@ -10,11 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class BannerController extends Controller
+
 {
    
     protected $repo;
     protected $img;
+   
     public function __construct(BannerRepository $repo,ImageRepository $img)
+   
     {
       $this->repo=$repo;
       $this->img=$img;
@@ -22,9 +25,11 @@ class BannerController extends Controller
 
     public function create(Request $req)
     {
+
         try {
+            
             Log::warning($req);
-    
+            
             $title = $req->input('title');
             $description = $req->input('description');
     
