@@ -53,6 +53,7 @@ Route::prefix('student')->group(function (){
 
 });
 
+Route::prefix('Counselors')->group(function (){
 
 Route::post('create',[CounselorsController::class,'createCounselors']);
 Route::post('update',[CounselorsController::class,'updateCounselors']);
@@ -60,7 +61,7 @@ Route::post('delete',[CounselorsController::class,'deleteCounselors']);
 Route::get('showall',[CounselorsController::class,'showallCounselors']);
 Route::post('listbyid',[CounselorsController::class,'listbyid']);
 
-
+});
 
 
 
@@ -163,5 +164,8 @@ Route::get('getbyid',[RatingController::class,'listbyid']);
 Route::prefix('available-seats')->group(function(){
 
     Route::post('seat-create',[AvailableSeatsController::class,'create']);
+    Route::post('seat-update',[AvailableSeatsController::class,'update']);
+    Route::delete('seat-delete',[AvailableSeatsController::class,'delete']);
+
 });
 
