@@ -58,7 +58,7 @@ $insertQuery = "INSERT INTO Counselors (name, staff_id, email, phone, office_loc
   
 
        $insertQuery = "INSERT INTO Counselors (name, staff_id, email, phone, office_location) VALUES ('$name', '$staff_id', '$email', '$phone', '$office_location')";
-        $a= DB::select($insertQuery);
+        $a= DB::select($insertQuery);     
       Log::warning($a);
       DB::commit();
       return ["status" => true, "data" => [], "message" => "$name,$staff_id,$email,$phone,$office_location added successfully"];
